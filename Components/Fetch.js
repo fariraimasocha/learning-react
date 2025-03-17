@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -13,6 +13,7 @@ import Image from "next/image";
 
 export default function Fetch() {
   const [page, setPage] = useState(1);
+  const [allUsers, setAllUsers] = useState([]);
 
   const fetchData = async () => {
     const response = await axios.get(`https://randomuser.me/api?page=${page}`);
@@ -26,16 +27,24 @@ export default function Fetch() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["users", page],
     queryFn: fetchData,
+    keepPreviousData: true,
   });
 
-  if (isPending) return <span>Loading...</span>;
+  useEffect(() => {
+    if (data && data.results) {
+      setAllUsers((prev) => [...prev, ...data.results]);
+    }
+  }, [data]);
+
+  if (isPending && allUsers.length === 0) return <span>Loading...</span>;
 
   if (isError) return <span>Error: {error.message}</span>;
 
   return (
     <div className="max-w-2xl mt-10 px-10">
-      {data.results.map((user) => (
-        <Card key={user.email}>
+      {isPending && <div className="mb-4">Loading more users...</div>}
+      {allUsers.map((user) => (
+        <Card key={user.email} className="mb-4">
           <CardHeader>
             <CardTitle>
               <div className="flex gap-1.5">
