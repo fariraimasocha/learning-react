@@ -22,12 +22,11 @@ export default function Intermediate() {
   const fetchData = async () => {
     const response = await axios.get("https://randomuser.me/api?results=20");
     const data = response.data.results.map((user) => user.location);
-    console.log(data);
     setLocation(data);
     return data;
   };
 
-  const { data, isPending, isError, error } = useQuery({
+  const { isPending, isError, error } = useQuery({
     queryKey: ["location"],
     queryFn: fetchData,
   });
