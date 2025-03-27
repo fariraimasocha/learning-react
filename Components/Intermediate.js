@@ -1,6 +1,6 @@
-import React from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import React from 'react';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import {
   Table,
   TableBody,
@@ -9,25 +9,25 @@ import {
   TableHeader,
   TableHead,
   TableRow,
-} from "./ui/table";
-import { Card } from "./ui/card";
-import { Input } from "./ui/input";
+} from './ui/table';
+import { Card } from './ui/card';
+import { Input } from './ui/input';
 
 export default function Intermediate() {
   const useState = React.useState;
 
   const [location, setLocation] = useState([]);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState('');
 
   const fetchData = async () => {
-    const response = await axios.get("https://randomuser.me/api?results=20");
+    const response = await axios.get('https://randomuser.me/api?results=20');
     const data = response.data.results.map((user) => user.location);
     setLocation(data);
     return data;
   };
 
   const { isPending, isError, error } = useQuery({
-    queryKey: ["location"],
+    queryKey: ['location'],
     queryFn: fetchData,
   });
 
@@ -61,7 +61,7 @@ export default function Intermediate() {
           <TableCaption>User Location Data</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead onClick={() => console.log("clicked city sort")}>
+              <TableHead onClick={() => console.log('clicked city sort')}>
                 City
               </TableHead>
               <TableHead>Coordinates</TableHead>
@@ -76,7 +76,7 @@ export default function Intermediate() {
               <TableRow>
                 <TableCell>{location.city}</TableCell>
                 <TableCell>
-                  {location.coordinates.latitude},{" "}
+                  {location.coordinates.latitude},{' '}
                   {location.coordinates.longitude}
                 </TableCell>
                 <TableCell>{location.country}</TableCell>
