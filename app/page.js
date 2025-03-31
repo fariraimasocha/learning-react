@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Intermediate from "@/Components/Intermediate";
 
-import Interview from "@/Components/Interview";
+import Interview from '@/Components/Interview';
 // import Fetch from "@/Components/Fetch";
 
 export default function MainPage() {

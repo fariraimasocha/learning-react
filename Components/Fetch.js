@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import {
   Card,
   CardHeader,
   CardTitle,
   CardFooter,
   CardContent,
-} from "./ui/card";
-import { Button } from "./ui/button";
-import Image from "next/image";
+} from './ui/card';
+import { Button } from './ui/button';
+import Image from 'next/image';
 
 export default function Fetch() {
   const [page, setPage] = useState(1);
@@ -25,7 +25,7 @@ export default function Fetch() {
   };
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["users", page],
+    queryKey: ['users', page],
     queryFn: fetchData,
     keepPreviousData: true,
   });

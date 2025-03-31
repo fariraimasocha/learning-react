@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -20,4 +21,4 @@ export default function Interview() {
     return <div>Error: {error.message}</div>;
   }
   return <div>{JSON.stringify(data)}</div>;
-}
+
