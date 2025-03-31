@@ -2,10 +2,11 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import Image from "next/image";
 
 export default function Interview() {
   const fetchCoffee = () => {
-    const response = axios.get("https://coffee.alexflipnote.dev");
+    const response = axios.get("https://coffee.alexflipnote.dev/FwcI43wXQNc_coffee.jpg");
     return response;
   };
 
