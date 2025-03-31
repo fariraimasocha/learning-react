@@ -22,3 +22,4 @@ export default function Interview() {
   }
   return <div>{JSON.stringify(data)}</div>;
 
+}
