@@ -2,9 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Intermediate from "@/Components/Intermediate";
-
-import Interview from '@/Components/Interview';
+// import Interview from '@/Components/Interview';
 // import Fetch from "@/Components/Fetch";
+import Scrimba from '@/Components/Scrimba';
 
 export default function MainPage() {
   const queryClient = new QueryClient();
@@ -12,7 +12,8 @@ export default function MainPage() {
     <QueryClientProvider client={queryClient}>
       {/* <Intermediate /> */}
       {/* <Fetch /> */}
-      <Interview />
+      {/* <Interview /> */}
+      <Scrimba />
     </QueryClientProvider>
   );
 }
