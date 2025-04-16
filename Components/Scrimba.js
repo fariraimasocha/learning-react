@@ -6,7 +6,14 @@ export default function Scrimba() {
 const cars = [
   { id: 1, name: "Ford", model: "Mustang" },
   { id: 2, name: "Chevy", model: "Camaro" },
-  { id: 3, name: "Dodge", model: "Charger" }
+  { id: 3, name: "Dodge", model: "Charger" },
+  { id: 4, name: "Toyota", model: "Supra" },
+  { id: 5, name: "Nissan", model: "Skyline" },
+  { id: 6, name: "Mazda", model: "RX-7" },
+  { id: 7, name: "Subaru", model: "WRX" },
+  { id: 8, name: "Mitsubishi", model: "Eclipse" },
+  { id: 9, name: "Honda", model: "Civic" },
+  { id: 10, name: "Volkswagen", model: "GTI" }
 ]
 
 
