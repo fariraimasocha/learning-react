@@ -1,25 +1,24 @@
-import React, {useState} from 'react'
+import React, {useMemo, useState} from 'react'
 import { Card, CardContent, CardFooter, CardTitle } from './ui/card'
 import { Button } from './ui/button'
 
-export default function useMemo() {
+export default function UseMemo() {
     const [count, setCount] = useState(0)
-    const [multiply, setmultiply] = useState(0) 
+
+    const multiply = useMemo(() => 
+        count * 2
+    , [count])
+
 
     const Increment = () => {
         setCount(count + 1)
-    }
-
-    const times = () => {
-        const multi = multiply *  2
-        console.log(multi)
-        setmultiply(multi)
+        console.log("count is", count)
     }
 
   return (
-    <div className='flex justify-center items-center px-6'>
+    <div className='flex justify-center items-center h-screen'>
         <div>
-            <Card>
+            <Card className="w-72 px-3">
                 <CardTitle>Count: {count}</CardTitle>
                 <CardContent>
                     <h1>Multiply: {multiply}</h1>
