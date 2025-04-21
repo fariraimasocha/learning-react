@@ -15,8 +15,6 @@ const cars = [
   { id: 9, name: "Honda", model: "Civic" },
   { id: 10, name: "Volkswagen", model: "GTI" }
 ]
-
-
   return (
     <div className='px-20 py-20'>
     
