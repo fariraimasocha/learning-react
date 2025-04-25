@@ -7,17 +7,10 @@ export default function UseMemo() {
     const [count, setCount] = useState(0)
     const [number, setNumber] = useState(0)
 
-    const calculated = count * number;
-
-    // const multiply = useMemo(() => 
-    //     count * number
-    // , [count, number])
-
     const multiply = useMemo(() => {
-        calculated
-    }, [calculated])
-
-    console.log("Multiply", multiply)
+        console.log(`Multiply function running - count: ${count}, number: ${number}`);
+        return count * number 
+    }, [count, number])
 
     const Increment = () => {
         setCount(count + 1)
@@ -31,7 +24,7 @@ export default function UseMemo() {
             <Card className="w-72 px-3 mt-4">
                 <CardTitle className="px-5">Count: {count}</CardTitle>
                 <CardContent>
-                    <h1>Multiply: {calculated}</h1>
+                    <h1>Multiply: {multiply}</h1>
                 </CardContent>
                 <CardFooter>
                     <Button variant="outline" onClick={Increment}>
