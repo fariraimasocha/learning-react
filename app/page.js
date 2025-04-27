@@ -15,7 +15,7 @@ export default function MainPage() {
       {/* <Fetch /> */}
       {/* <Interview /> */}
       {/* <Scrimba /> */}
-      {/* <UseMemo /> */}
+      <UseMemo />
     </QueryClientProvider>
   );
 }
