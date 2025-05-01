@@ -63,12 +63,15 @@ export default function Fetch() {
             />
           </CardContent>
           <CardFooter>
-            <Button variant="outline" onClick={handleNext}>
+          {/* <Button variant="outline" onClick={handleNext}>
               Next
-            </Button>
+            </Button> */}
           </CardFooter>
         </Card>
       ))}
+        <Button variant="outline" onClick={handleNext}>
+              Next
+        </Button>
     </div>
   );
 }
