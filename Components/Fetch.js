@@ -69,9 +69,9 @@ export default function Fetch() {
           </CardFooter>
         </Card>
       ))}
-        <Button variant="outline" onClick={handleNext}>
+      <Button variant="outline" onClick={handleNext}>
               Next
-        </Button>
+      </Button>
     </div>
   );
 }
