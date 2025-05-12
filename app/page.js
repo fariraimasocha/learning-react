@@ -1,9 +1,10 @@
 'use client';
 
+import Test from '@/Components/Test';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Intermediate from "@/Components/Intermediate";
 // import Interview from '@/Components/Interview';
-import Fetch from "@/Components/Fetch";
+// import Fetch from "@/Components/Fetch";
 // import Scrimba from '@/Components/Scrimba';
 // import UseMemo from '@/Components/useMemo';
 
@@ -12,10 +13,11 @@ export default function MainPage() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* <Intermediate /> */}
-      <Fetch />
+      {/* <Fetch /> */}
       {/* <Interview /> */}
       {/* <Scrimba /> */}
       {/* <UseMemo /> */}
+      <Test />
     </QueryClientProvider>
   );
 }
