@@ -43,6 +43,9 @@ export default function Domain() {
         toast.success('Domain is available');
         toast('Redirecting to buy domain');
         router.push('/domain/buy');
+      } else {
+        router.push('/domain/buy');
+        toast.error('redirecting to buy domain');
       }
     } catch (error) {
       console.error('Error:', error);
