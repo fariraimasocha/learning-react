@@ -13,18 +13,25 @@ export default function Domain() {
   const SearchUrl = 'https://domains-api.p.rapidapi.com/domains/';
 
   const handleSearch = async () => {
-    const response = await fetch(
-      `${SearchUrl}${domain}/whois?follow=1&raw=false`,
-      {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-host': 'domains-api.p.rapidapi.com',
-          'x-rapidapi-key':
-            '9b96a5333bmsh12979cb913068bep18c711jsn337182f0fc14',
-          Host: 'domains-api.p.rapidapi.com',
-        },
-      }
-    );
+    try {
+      const response = await fetch(
+        `${SearchUrl}${domain}/whois?follow=1&raw=false`,
+        {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': 'domains-api.p.rapidapi.com',
+            'x-rapidapi-key':
+              '9b96a5333bmsh12979cb913068bep18c711jsn337182f0fc14',
+            Host: 'domains-api.p.rapidapi.com',
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
