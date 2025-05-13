@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Card } from './ui/card';
+import { toast } from 'sonner';
 
 export default function BuyDomain() {
   const [domain, setDomain] = useState('');
@@ -22,7 +23,14 @@ export default function BuyDomain() {
       );
 
       const data = await response.json();
-      console.log(data);
+      console.log('The Response from GoDaddy', data);
+
+      if (data?.data?.available === true) {
+        toast.success('Domain is available');
+      }
+      if (data?.data?.available === false) {
+        toast.error('Domain is not available');
+      }
     } catch (error) {
       console.error('Error:', error);
     }

@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {
-  const body = await req.json();
-
-  const { domain, checkType, forTransfer } = body;
+  const searchParams = req.nextUrl.searchParams;
+  const domain = searchParams.get('domain');
+  const checkType = searchParams.get('checkType');
+  const forTransfer = searchParams.get('forTransfer');
 
   try {
     const response = await fetch(
@@ -12,7 +13,7 @@ export async function GET(req) {
         method: 'GET',
         headers: {
           accept: 'application/json',
-          Authorization: `sso-key ${process.env.GODADDY_API_KEY}:${process.env.GODADDY_API_SECRET}`,
+          Authorization: `sso-key ${process.env.GODADDY_API_KEY}:${process.env.GODADDY_SECRET}`,
         },
       }
     );

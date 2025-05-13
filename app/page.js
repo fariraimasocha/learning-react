@@ -1,6 +1,6 @@
 'use client';
 
-import BuyDomain from '@/Components/BuyDomain';
+import BuyDomain from '@/Components/CheckDomain';
 import Test from '@/Components/Test';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Intermediate from "@/Components/Intermediate";
