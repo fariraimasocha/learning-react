@@ -84,7 +84,7 @@ export default function BuyDomain() {
       phone: '+263772123456',
       jobTitle: 'Administrator',
     },
-    domain: domain,
+    domain: 'meek1.one',
     nameServers: ['ns1.godaddy.com', 'ns2.godaddy.com'],
     period: 1,
     privacy: false,
@@ -125,7 +125,7 @@ export default function BuyDomain() {
           <Card className="w-[700] px-5 mt-5">
             <Label htmlFor="email">Domain purchase</Label>
             <Input
-              value={domain}
+              value="meek1.one"
               onChange={(e) => setDomain(e.target.value)}
               placeholder="Enter domain name"
             />
