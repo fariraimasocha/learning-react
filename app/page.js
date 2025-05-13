@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // import Fetch from "@/Components/Fetch";
 // import Scrimba from '@/Components/Scrimba';
 // import UseMemo from '@/Components/useMemo';
+import Domain from '@/Components/Domain';
 
 export default function MainPage() {
   const queryClient = new QueryClient();
@@ -17,7 +18,8 @@ export default function MainPage() {
       {/* <Interview /> */}
       {/* <Scrimba /> */}
       {/* <UseMemo /> */}
-      <Test />
+      {/* <Test /> */}
+      <Domain />
     </QueryClientProvider>
   );
 }
