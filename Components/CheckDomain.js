@@ -31,6 +31,7 @@ export default function BuyDomain() {
 
       if (data?.data?.available === true) {
         toast.success('Domain is available');
+        router.push('/domain/payment');
         toast('Redirecting to buy domain');
       }
       if (data?.data?.available === false) {

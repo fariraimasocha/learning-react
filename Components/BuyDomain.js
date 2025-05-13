@@ -14,5 +14,24 @@ export default function BuyDomain() {
 
   const handleBuyDomain = async () => {};
 
-  return <div>BuyDomain</div>;
+  return (
+    <div>
+      <div className="flex justify-center items-center h-screen">
+        <div>
+          <div>
+            <h1>Step 3 Domain Purchasing</h1>
+          </div>
+          <Card className="w-[700] px-5 mt-5">
+            <Label htmlFor="email">Domain purchase</Label>
+            <Input
+              value={domain}
+              onChange={(e) => setDomain(e.target.value)}
+              placeholder="Enter domain name"
+            />
+            <Button onClick={handleSearch}>Buy</Button>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
 }
