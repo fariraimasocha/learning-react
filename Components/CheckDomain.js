@@ -1,16 +1,18 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Card } from './ui/card';
 import { toast } from 'sonner';
-import Router from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function BuyDomain() {
   const [domain, setDomain] = useState('');
-  const router = Router;
+  const router = useRouter();
+
+  const CustomerId = '658344786';
 
   const handleSearch = async () => {
     try {
@@ -30,7 +32,6 @@ export default function BuyDomain() {
       if (data?.data?.available === true) {
         toast.success('Domain is available');
         toast('Redirecting to buy domain');
-        router.push('/buy-domain');
       }
       if (data?.data?.available === false) {
         toast.error('Domain is not available');
