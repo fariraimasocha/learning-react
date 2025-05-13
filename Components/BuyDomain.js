@@ -34,10 +34,14 @@ export default function BuyDomain() {
     return data;
   };
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery{
     queryKey: ['domain', domain],
-    queryFn: () => fetchDomain,
-  });
+    queryFn: fetchDomain,
+  };
+
+  // Display loading state or data
+  console.log('Domain data:', data);
+  if (isLoading) console.log('Loading...');
 
   return (
     <div className="flex justify-center items-center h-screen">
