@@ -5,13 +5,13 @@ export async function POST(req) {
     const body = await req.json();
 
     const response = await fetch(
-      'https://api.ote-godaddy.com/v1/domains/purchase/validate',
+      'https://api.ote-godaddy.com/v1/domains/purchase',
       {
         method: 'POST',
         headers: {
           accept: 'application/json',
           'Content-Type': 'application/json',
-          'X-Shopper-Id': '658344786',
+          'X-Market-Id': 'en-ZW',
           Authorization: `sso-key ${process.env.GODADDY_API_KEY}:${process.env.GODADDY_SECRET}`,
         },
         body: JSON.stringify({

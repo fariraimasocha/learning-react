@@ -16,8 +16,8 @@ export default function BuyDomain() {
 
   const payload = {
     consent: {
-      agreedAt: new Date().toISOString(),
-      agreedBy: '658344786',
+      agreedAt: '2025-05-14T12:00:00Z',
+      agreedBy: '192.168.1.110',
       agreementKeys: ['DNRA'],
     },
     contactAdmin: {
@@ -38,19 +38,19 @@ export default function BuyDomain() {
     },
     contactBilling: {
       addressMailing: {
-        address1: '9410 Unidale Drive',
+        address1: '9410 Unidale Harare',
         address2: 'Sunningdale',
         city: 'Harare',
         country: 'ZW',
-        postalCode: '00263',
+        postalCode: '00000',
         state: 'HA',
       },
-      nameFirst: 'Tendai',
-      nameLast: 'Moyo',
-      organization: 'ZimTech Solutions',
-      email: 'tendai.moyo@zimtech.co.zw',
-      phone: '+263.772123456',
-      jobTitle: 'Administrator',
+      nameFirst: 'Farirai',
+      nameLast: 'Masocha',
+      organization: 'Daily Sale shop',
+      email: 'fariraimasocha@gmail.com',
+      phone: '+263.781840930',
+      jobTitle: 'Software Developer',
     },
     contactRegistrant: {
       addressMailing: {
