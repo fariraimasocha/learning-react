@@ -5,7 +5,7 @@ export async function POST(req) {
     const body = await req.json();
 
     const response = await fetch(
-      'https://api.ote-godaddy.com/v1/domains/purchase',
+      'https://api.ote-godaddy.com/v1/domains/purchase/validate',
       {
         method: 'POST',
         headers: {

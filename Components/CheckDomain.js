@@ -51,7 +51,7 @@ export default function BuyDomain() {
         <Card className="w-[700] px-5 mt-5">
           <Label htmlFor="email">Domain Search</Label>
           <Input
-            value="meek1.one"
+            value={domain}
             onChange={(e) => setDomain(e.target.value)}
             placeholder="Enter domain name"
           />

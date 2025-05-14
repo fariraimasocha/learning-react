@@ -16,9 +16,9 @@ export default function BuyDomain() {
 
   const payload = {
     consent: {
-      agreedAt: new Date(),
-      agreedBy: CustomerId,
-      agreementKeys: ['DNRA', 'DNDA'],
+      agreedAt: new Date().toISOString(),
+      agreedBy: '658344786',
+      agreementKeys: ['DNRA'],
     },
     contactAdmin: {
       addressMailing: {
@@ -33,7 +33,7 @@ export default function BuyDomain() {
       nameLast: 'Moyo',
       organization: 'ZimTech Solutions',
       email: 'tendai.moyo@zimtech.co.zw',
-      phone: '+263772123456',
+      phone: '+263.772123456',
       jobTitle: 'Administrator',
     },
     contactBilling: {
@@ -49,7 +49,7 @@ export default function BuyDomain() {
       nameLast: 'Moyo',
       organization: 'ZimTech Solutions',
       email: 'tendai.moyo@zimtech.co.zw',
-      phone: '+263772123456',
+      phone: '+263.772123456',
       jobTitle: 'Administrator',
     },
     contactRegistrant: {
@@ -65,7 +65,7 @@ export default function BuyDomain() {
       nameLast: 'Moyo',
       organization: 'ZimTech Solutions',
       email: 'tendai.moyo@zimtech.co.zw',
-      phone: '+263772123456',
+      phone: '+263.772123456',
       jobTitle: 'Administrator',
     },
     contactTech: {
@@ -81,7 +81,7 @@ export default function BuyDomain() {
       nameLast: 'Moyo',
       organization: 'ZimTech Solutions',
       email: 'tendai.moyo@zimtech.co.zw',
-      phone: '+263772123456',
+      phone: '+263.772123456',
       jobTitle: 'Administrator',
     },
     domain: 'meek1.one',
