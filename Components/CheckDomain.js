@@ -6,9 +6,13 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Card } from './ui/card';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function BuyDomain() {
   const [domain, setDomain] = useState('');
+  const router = useRouter();
+
+  const CustomerId = '658344786';
 
   const handleSearch = async () => {
     try {
@@ -27,6 +31,8 @@ export default function BuyDomain() {
 
       if (data?.data?.available === true) {
         toast.success('Domain is available');
+        router.push('/domain/payment');
+        toast('Redirecting to buy domain');
       }
       if (data?.data?.available === false) {
         toast.error('Domain is not available');

@@ -1,20 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
 import { Label } from './ui/label';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Domain() {
   const [domain, setDomain] = useState('');
-
-  const BaseUrl = 'api.ote-godaddy.com';
-  const CustomerId = '658344786';
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const SearchUrl = 'https://domains-api.p.rapidapi.com/domains/';
 
   const handleSearch = async () => {
+    setIsLoading(true);
+    toast('Searching for domain');
+
     try {
       const response = await fetch(
         `${SearchUrl}${domain}/whois?follow=1&raw=false`,
@@ -31,8 +35,22 @@ export default function Domain() {
 
       const data = await response.json();
       console.log(data);
+
+      if (
+        data['whois.nic.one'] &&
+        data['whois.nic.one']['Domain Status'].length > 0
+      ) {
+        toast.success('Domain is available');
+        toast('Redirecting to buy domain');
+        router.push('/domain/buy');
+      } else {
+        router.push('/domain/buy');
+        toast.error('redirecting to buy domain');
+      }
     } catch (error) {
       console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
