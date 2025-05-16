@@ -14,6 +14,7 @@ export async function POST(request) {
       description,
       imageUrl,
       socialLinks: socialLinks || [],
+      products: [],
     });
     return NextResponse.json(
       { message: 'Microsite created successfully', microsite: newMicrosite },
