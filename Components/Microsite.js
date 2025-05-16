@@ -14,11 +14,14 @@ import {
 } from './ui/card';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
+import { UploadDropzone } from '@/utils/uploadthing';
+import Image from 'next/image';
 
 export default function Microsite() {
   const router = useRouter();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [socialLinks, setSocialLinks] = useState({
     facebook: '',
     twitter: '',
@@ -35,9 +38,24 @@ export default function Microsite() {
     }));
   };
 
+  const handleUploadComplete = (res) => {
+    console.log('Files: ', res);
+    if (res && res.length > 0) {
+      setImageUrl(res[0].ufsUrl);
+      toast.success('Image uploaded successfully');
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Validate image is uploaded
+    if (!imageUrl) {
+      toast.error('Please upload an image first');
+      setIsSubmitting(false);
+      return;
+    }
 
     const formattedSocialLinks = Object.entries(socialLinks)
       .filter(([_, url]) => url.trim() !== '')
@@ -57,6 +75,7 @@ export default function Microsite() {
           name,
           description,
           userId,
+          imageUrl,
           socialLinks: formattedSocialLinks,
         }),
       });
@@ -79,7 +98,7 @@ export default function Microsite() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center">
       <div>
         <Card className="w-[700] px-5 mt-5">
           <CardHeader>
@@ -87,6 +106,40 @@ export default function Microsite() {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
+              {/* Image Upload Section */}
+              <div className="mb-4">
+                <Label htmlFor="image" className="mb-2 block">
+                  Site Image
+                </Label>
+                {!imageUrl ? (
+                  <UploadDropzone
+                    endpoint="imageUploader"
+                    onClientUploadComplete={handleUploadComplete}
+                    onUploadError={(error) => {
+                      toast.error(`Upload error: ${error.message}`);
+                    }}
+                  />
+                ) : (
+                  <div className="flex flex-col gap-2 items-center">
+                    <div className="relative w-full h-48 overflow-hidden rounded-md">
+                      <Image
+                        src={imageUrl}
+                        alt="Site image"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setImageUrl('')}
+                    >
+                      Replace Image
+                    </Button>
+                  </div>
+                )}
+              </div>
+
               <Label htmlFor="name">Name</Label>
               <Input
                 id="name"
@@ -125,10 +178,10 @@ export default function Microsite() {
             </div>
           </CardFooter>
           <Button
-            className="mx-5"
+            className="mx-5 mb-5"
             onClick={handleSubmit}
             type="submit"
-            disabled={isSubmitting || !name || !description}
+            disabled={isSubmitting || !name || !description || !imageUrl}
           >
             {isSubmitting ? 'Publishing...' : 'Publish'}
           </Button>
@@ -139,6 +192,16 @@ export default function Microsite() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col">
+              {imageUrl && (
+                <div className="relative w-full h-48 mb-4 overflow-hidden rounded-md">
+                  <Image
+                    src={imageUrl}
+                    alt="Site image preview"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
               <h2 className="text-lg font-semibold">
                 {name || 'Your Site Name'}
               </h2>

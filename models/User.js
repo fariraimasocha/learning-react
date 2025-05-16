@@ -19,6 +19,26 @@ const micrositeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    products: [
+      {
+        productName: {
+          type: String,
+          required: true,
+        },
+        productDescription: {
+          type: String,
+          required: true,
+        },
+        productPrice: {
+          type: Number,
+          required: true,
+        },
+        productImageUrl: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     socialLinks: [
       {
         platform: {

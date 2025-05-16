@@ -6,6 +6,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'randomuser.me',
       },
+      {
+        protocol: 'https',
+        hostname: '8k43l3p85r.ufs.sh',
+        pathname: '/**',
+      },
     ],
   },
 };
