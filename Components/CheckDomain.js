@@ -32,7 +32,7 @@ export default function BuyDomain() {
       if (data?.data?.available === true) {
         toast.success('Domain is available');
         router.push('/microsite');
-        toast('Redirecting to buy domain');
+        toast('Redirecting to Website Builder');
       }
       if (data?.data?.available === false) {
         toast.error('Domain is not available');

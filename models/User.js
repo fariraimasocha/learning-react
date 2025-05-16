@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { refreshModel } from '@/utils/modelutils';
 
 const micrositeSchema = new mongoose.Schema(
   {
@@ -14,12 +15,29 @@ const micrositeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    socialLinks: [
+      {
+        platform: {
+          type: String,
+          required: true,
+          enum: ['facebook', 'twitter'],
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+        displayName: {
+          type: String,
+          default: '',
+        },
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Microsite =
-  mongoose.models.Microsite || mongoose.model('Microsite', micrositeSchema);
+const Microsite = refreshModel('Microsite', micrositeSchema);
+
 export default Microsite;

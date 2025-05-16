@@ -19,13 +19,33 @@ export default function Microsite() {
   const router = useRouter();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [socialLinks, setSocialLinks] = useState({
+    facebook: '',
+    twitter: '',
+  });
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const userId = '56464774848';
+  const userId = '56464774853';
+
+  const handleSocialLinkChange = (platform, value) => {
+    setSocialLinks((prevLinks) => ({
+      ...prevLinks,
+      [platform]: value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    const formattedSocialLinks = Object.entries(socialLinks)
+      .filter(([_, url]) => url.trim() !== '')
+      .map(([platform, url]) => ({
+        platform,
+        url,
+        displayName: platform.charAt(0).toUpperCase() + platform.slice(1),
+      }));
 
     try {
       const response = await fetch('/api/microsite', {
@@ -33,7 +53,12 @@ export default function Microsite() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, description, userId }),
+        body: JSON.stringify({
+          name,
+          description,
+          userId,
+          socialLinks: formattedSocialLinks,
+        }),
       });
 
       if (response.ok) {
@@ -60,29 +85,53 @@ export default function Microsite() {
           <CardHeader>
             <CardTitle>Your Microsite</CardTitle>
           </CardHeader>
-          <div className="grid gap-4">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter microsite name"
-            />
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              placeholder="Enter microsite description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <Button
-              onClick={handleSubmit}
-              type="submit"
-              disabled={isSubmitting || !name || !description}
-            >
-              {isSubmitting ? 'Publishing...' : 'Publish'}
-            </Button>
-          </div>
+          <CardContent>
+            <div className="grid gap-4">
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter microsite name"
+              />
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                placeholder="Enter microsite description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </div>
+          </CardContent>
+          <CardFooter>
+            <div className="w-full flex flex-col gap-2">
+              <Label className="text-sm text-gray-500">Your Social Links</Label>
+              <Input
+                id="facebook-link"
+                value={socialLinks.facebook}
+                onChange={(e) =>
+                  handleSocialLinkChange('facebook', e.target.value)
+                }
+                placeholder="facebook"
+              />
+              <Input
+                id="twitter-link"
+                value={socialLinks.twitter}
+                onChange={(e) =>
+                  handleSocialLinkChange('twitter', e.target.value)
+                }
+                placeholder="twitter"
+              />
+            </div>
+          </CardFooter>
+          <Button
+            className="mx-5"
+            onClick={handleSubmit}
+            type="submit"
+            disabled={isSubmitting || !name || !description}
+          >
+            {isSubmitting ? 'Publishing...' : 'Publish'}
+          </Button>
         </Card>
         <Card className="mt-4">
           <CardHeader>
@@ -99,9 +148,26 @@ export default function Microsite() {
             </div>
           </CardContent>
           <CardFooter>
-            <Label className="text-sm text-gray-500">
-              This is a preview of your microsite.
-            </Label>
+            <div className="w-full">
+              <Label className="text-sm text-gray-500 mb-2 block">
+                Social Links:
+              </Label>
+              <div className="flex flex-col gap-2">
+                {socialLinks.facebook && (
+                  <div className="text-sm">
+                    Facebook: {socialLinks.facebook}
+                  </div>
+                )}
+                {socialLinks.twitter && (
+                  <div className="text-sm">Twitter: {socialLinks.twitter}</div>
+                )}
+                {!socialLinks.facebook && !socialLinks.twitter && (
+                  <div className="text-sm text-gray-400">
+                    No social links added
+                  </div>
+                )}
+              </div>
+            </div>
           </CardFooter>
         </Card>
       </div>
