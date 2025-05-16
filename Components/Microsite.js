@@ -186,7 +186,7 @@ export default function Microsite() {
             {isSubmitting ? 'Publishing...' : 'Publish'}
           </Button>
         </Card>
-        <Card className="mt-4">
+        <Card className="mt-4 mb-4">
           <CardHeader>
             <CardTitle>Microsite Preview</CardTitle>
           </CardHeader>
