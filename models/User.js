@@ -1,7 +1,12 @@
 import mongoose from 'mongoose';
+import { refreshModel } from '@/utils/modelutils';
 
 const micrositeSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -10,11 +15,29 @@ const micrositeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    socialLinks: [
+      {
+        platform: {
+          type: String,
+          required: true,
+          enum: ['facebook', 'twitter'],
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+        displayName: {
+          type: String,
+          default: '',
+        },
+      },
+    ],
   },
   {
-    timeseries: true,
+    timestamps: true,
   }
 );
 
-const Microsite = mongoose.model('Microsite', micrositeSchema);
+const Microsite = refreshModel('Microsite', micrositeSchema);
+
 export default Microsite;
