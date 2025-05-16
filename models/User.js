@@ -15,6 +15,10 @@ const micrositeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imageUrl: {
+      type: String,
+      required: true,
+    },
     socialLinks: [
       {
         platform: {
