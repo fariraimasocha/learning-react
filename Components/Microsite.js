@@ -42,6 +42,9 @@ export default function Microsite() {
     <div className="flex justify-center items-center h-screen">
       <div>
         <Card className="w-[700] px-5 mt-5">
+          <CardHeader>
+            <CardTitle>Your Microsite</CardTitle>
+          </CardHeader>
           <div className="grid gap-4">
             <Label htmlFor="name">Name</Label>
             <Input
@@ -58,7 +61,7 @@ export default function Microsite() {
               onChange={(e) => setDescription(e.target.value)}
             />
             <Button onClick={handleSubmit} type="submit">
-              Create Microsite
+              Publish
             </Button>
           </div>
         </Card>
