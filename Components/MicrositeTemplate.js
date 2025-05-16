@@ -9,6 +9,7 @@ import {
 } from './ui/card';
 import { Label } from './ui/label';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function MicrositeTemplate({ microsite }) {
   return (
@@ -18,6 +19,21 @@ export default function MicrositeTemplate({ microsite }) {
           <CardTitle>Microsite Preview</CardTitle>
         </CardHeader>
         <CardContent>
+          {microsite.imageUrl ? (
+            <div className="mb-4 w-full relative rounded-md overflow-hidden h-48">
+              <Image
+                src={microsite.imageUrl}
+                alt={`${microsite.name} image`}
+                fill
+                className="object-cover"
+                unoptimized
+              />
+            </div>
+          ) : (
+            <div className="mb-4 w-full h-48 bg-gray-200 rounded-md flex items-center justify-center">
+              <p className="text-gray-500">No image available</p>
+            </div>
+          )}
           <div className="flex flex-col">
             <h2 className="text-lg font-semibold">{microsite.name}</h2>
             <p className="text-sm text-gray-500">{microsite.description}</p>
