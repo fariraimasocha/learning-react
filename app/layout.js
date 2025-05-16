@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: 'learning-react',
-  description: 'A simple Next.js app to learn React',
+  description: 'The Wondabox AI APP',
 };
 
 export default function RootLayout({ children }) {
