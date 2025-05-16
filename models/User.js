@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 
 const micrositeSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -12,9 +16,10 @@ const micrositeSchema = new mongoose.Schema(
     },
   },
   {
-    timeseries: true,
+    timestamps: true,
   }
 );
 
-const Microsite = mongoose.model('Microsite', micrositeSchema);
+const Microsite =
+  mongoose.models.Microsite || mongoose.model('Microsite', micrositeSchema);
 export default Microsite;

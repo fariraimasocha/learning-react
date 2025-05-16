@@ -13,28 +13,43 @@ import {
   CardTitle,
 } from './ui/card';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Microsite() {
+  const router = useRouter();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const userId = '56464774848';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch('/api/microsite', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, description }),
-    });
+    setIsSubmitting(true);
 
-    if (response.ok) {
-      const data = await response.json();
-      toast.success('Microsite created successfully');
-      console.log('Microsite created:', data);
-    } else {
-      console.error('Error creating microsite');
-      toast.error('Error creating microsite');
+    try {
+      const response = await fetch('/api/microsite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, description, userId }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        toast.success('Microsite created successfully');
+        console.log('Microsite created:', data);
+        router.push(`/microsite/${userId}`);
+      } else {
+        console.error('Error creating microsite');
+        toast.error('Error creating microsite');
+      }
+    } catch (error) {
+      console.error('Error creating microsite:', error);
+      toast.error('Something went wrong');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -60,8 +75,12 @@ export default function Microsite() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
-            <Button onClick={handleSubmit} type="submit">
-              Publish
+            <Button
+              onClick={handleSubmit}
+              type="submit"
+              disabled={isSubmitting || !name || !description}
+            >
+              {isSubmitting ? 'Publishing...' : 'Publish'}
             </Button>
           </div>
         </Card>
@@ -71,8 +90,12 @@ export default function Microsite() {
           </CardHeader>
           <CardContent>
             <div className="flex flex-col">
-              <h2 className="text-lg font-semibold">{name}</h2>
-              <p className="text-sm text-gray-500">{description}</p>
+              <h2 className="text-lg font-semibold">
+                {name || 'Your Site Name'}
+              </h2>
+              <p className="text-sm text-gray-500">
+                {description || 'Your site description will appear here'}
+              </p>
             </div>
           </CardContent>
           <CardFooter>

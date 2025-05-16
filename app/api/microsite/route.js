@@ -4,10 +4,11 @@ import { connect } from '@/utils/connect';
 
 export async function POST(request) {
   await connect();
-  const { name, description } = await request.json();
+  const { userId, name, description } = await request.json();
 
   try {
     Microsite.create({
+      userId,
       name,
       description,
     });
