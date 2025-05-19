@@ -62,8 +62,7 @@ export default function Fetch() {
               alt="profile"
             />
           </CardContent>
-          <CardFooter>
-          </CardFooter>
+          <CardFooter></CardFooter>
         </Card>
       ))}
       <Button variant="outline" onClick={handleNext}>
