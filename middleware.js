@@ -1,6 +1,6 @@
+// 1. First, let's update your middleware.js
+// File: middleware.js
 import { NextResponse } from 'next/server';
-import { connect } from '@/utils/connect';
-import Dns from '@/models/Dns';
 
 export async function middleware(request) {
   // Get the hostname (e.g. fariraimasocha.co.zw, demo.example.com)
@@ -19,13 +19,28 @@ export async function middleware(request) {
   }
 
   try {
-    await connect();
-    const dns = await Dns.findOne({ domain: hostname });
+    // Call our API endpoint rather than connecting to the database directly
+    const baseUrl =
+      process.env.NEXT_PUBLIC_API_URL ||
+      `https://${request.headers.get('x-forwarded-host') || request.headers.get('host')}`;
 
-    if (dns) {
-      const url = request.nextUrl.clone();
-      url.pathname = `/microsite/${dns.userId}`;
-      return NextResponse.rewrite(url);
+    const response = await fetch(
+      `${baseUrl}/api/dns/lookup?domain=${hostname}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.ok) {
+      const dns = await response.json();
+      if (dns && dns.micrositeId) {
+        const url = request.nextUrl.clone();
+        url.pathname = `/microsite/${dns.micrositeId}${path === '/' ? '' : path}`;
+        return NextResponse.rewrite(url);
+      }
     }
   } catch (error) {
     console.error('Error in middleware:', error);
