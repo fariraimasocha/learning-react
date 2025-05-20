@@ -6,19 +6,20 @@ const token = process.env.NAMEDOTCOM_API_KEY;
 export async function POST(request) {
   const credentials = Buffer.from(`${username}:${token}`).toString('base64');
 
+  // Get domain from request body
+  const { domain } = await request.json();
+
+  // Validate input
+  if (!domain) {
+    return NextResponse.json(
+      { error: 'Invalid request: domain is required' },
+      { status: 400 }
+    );
+  }
+
   try {
-    const { domain, nameservers } = await request.json();
-
-    // Validate input
-    if (!domain || !nameservers || !Array.isArray(nameservers)) {
-      return NextResponse.json(
-        { error: 'Invalid request: domain and nameservers array required' },
-        { status: 400 }
-      );
-    }
-
     const response = await fetch(
-      `https://api.dev.name.com/v4/domains/${domain}:setNameservers`,
+      `https://api.dev.name.com/v4/domains/${domain}:unlock`,
       {
         method: 'POST',
         headers: {
@@ -26,7 +27,7 @@ export async function POST(request) {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify({ nameservers }),
+        // No body needed for unlock operation based on the curl example
       }
     );
 
@@ -46,7 +47,7 @@ export async function POST(request) {
     if (!response.ok) {
       return NextResponse.json(
         {
-          error: 'Failed to set nameservers',
+          error: 'Failed to unlock domain',
           details: data,
           status: response.status,
         },
@@ -54,11 +55,13 @@ export async function POST(request) {
       );
     }
 
-    return NextResponse.json(data);
+    return NextResponse.json(
+      data || { success: true, message: 'Domain unlocked successfully' }
+    );
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch data', message: error.message },
+      { error: 'Failed to unlock domain', message: error.message },
       { status: 500 }
     );
   }
