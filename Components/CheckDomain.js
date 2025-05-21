@@ -6,6 +6,8 @@ import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { Card } from './ui/card';
 import { toast } from 'sonner';
+import { Badge } from './ui/badge';
+
 import { useRouter } from 'next/navigation';
 
 export default function BuyDomain() {
@@ -15,7 +17,7 @@ export default function BuyDomain() {
   const [userSetMessage, setUserSetMessage] = useState(
     'look at the domain and give me 3 domain suggestions'
   );
-  const [domainSuggestions, setDomainSuggestions] = useState('');
+  const [domainSuggestions, setDomainSuggestions] = useState([]);
   const [hasSuggestions, setHasSuggestions] = useState(false);
 
   const CustomerId = '658344786';
@@ -74,8 +76,14 @@ export default function BuyDomain() {
 
       if (response.ok) {
         toast.success('Domain suggestions fetched successfully');
+
+        const content = data.content;
+        const domainRegex = /\*\*(.*?)\*\*/g;
+        const matches = [...content.matchAll(domainRegex)];
+        const extractedDomains = matches.map((match) => match[1].trim());
+
+        setDomainSuggestions(extractedDomains);
         setHasSuggestions(true);
-        setDomainSuggestions(data.content);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -99,9 +107,20 @@ export default function BuyDomain() {
           <Button onClick={handleSearch}>Search</Button>
 
           {hasSuggestions && (
-            <div>
-              <h2>Domain Suggestions</h2>
-              <p>{domainSuggestions}</p>
+            <div className="mt-5">
+              <h2 className="mb-3">Domain Suggestions</h2>
+              <div className="flex flex-wrap gap-2">
+                {domainSuggestions.map((domainName, index) => (
+                  <Badge
+                    key={index}
+                    variant="outline"
+                    className="cursor-pointer hover:bg-primary hover:text-primary-foreground"
+                    onClick={() => setDomain(domainName)}
+                  >
+                    {domainName}
+                  </Badge>
+                ))}
+              </div>
             </div>
           )}
         </Card>
