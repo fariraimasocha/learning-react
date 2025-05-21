@@ -15,7 +15,8 @@ export default function BuyDomain() {
   const [userSetMessage, setUserSetMessage] = useState(
     'look at the domain and give me 3 domain suggestions'
   );
-  const [domainSuggestions, setDomainSuggestions] = useState([]);
+  const [domainSuggestions, setDomainSuggestions] = useState('');
+  const [hasSuggestions, setHasSuggestions] = useState(false);
 
   const CustomerId = '658344786';
 
@@ -59,17 +60,26 @@ export default function BuyDomain() {
         },
         body: JSON.stringify({
           model,
-          userSetMessage: messageWithDomain,
+          userMessage: messageWithDomain,
         }),
       });
 
+      const data = await response.json();
+      console.log('The Response from Groq', data);
+
       if (!response.ok) {
-        console.error('Error fetching domain suggestions');
+        console.error('Error fetching domain suggestions', data);
         toast.error('Error fetching domain suggestions');
+      }
+
+      if (response.ok) {
+        toast.success('Domain suggestions fetched successfully');
+        setHasSuggestions(true);
+        setDomainSuggestions(data.content);
       }
     } catch (error) {
       console.error('Error:', error);
-      toast.error('Error fetching domain suggestions');
+      toast.error('Error fetching domain suggestions', error);
     }
   };
 
@@ -87,6 +97,13 @@ export default function BuyDomain() {
             placeholder="Enter domain name"
           />
           <Button onClick={handleSearch}>Search</Button>
+
+          {hasSuggestions && (
+            <div>
+              <h2>Domain Suggestions</h2>
+              <p>{domainSuggestions}</p>
+            </div>
+          )}
         </Card>
       </div>
     </div>
