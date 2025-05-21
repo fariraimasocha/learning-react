@@ -15,7 +15,7 @@ export default function BuyDomain() {
   const router = useRouter();
   const [model, setModel] = useState('mistral-saba-24b');
   const [userSetMessage, setUserSetMessage] = useState(
-    'look at the domain and give me 3 domain suggestions'
+    'look at the domain and give me 7 domain suggestions'
   );
   const [domainSuggestions, setDomainSuggestions] = useState([]);
   const [hasSuggestions, setHasSuggestions] = useState(false);
