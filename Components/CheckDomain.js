@@ -15,6 +15,7 @@ export default function BuyDomain() {
   const [userSetMessage, setUserSetMessage] = useState(
     'look at the domain and give me 3 domain suggestions'
   );
+  const [domainSuggestions, setDomainSuggestions] = useState([]);
 
   const CustomerId = '658344786';
 
@@ -40,6 +41,7 @@ export default function BuyDomain() {
       }
       if (data?.data?.available === false) {
         toast.error('Domain is not available');
+        handleDomainSuggestion(domain);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -47,6 +49,8 @@ export default function BuyDomain() {
   };
 
   const handleDomainSuggestion = async () => {
+    const messageWithDomain = `${userSetMessage} for "${domain}"`;
+
     try {
       const response = await fetch('/api/groq', {
         method: 'POST',
@@ -55,11 +59,12 @@ export default function BuyDomain() {
         },
         body: JSON.stringify({
           model,
-          userSetMessage,
+          userSetMessage: messageWithDomain,
         }),
       });
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        console.error('Error fetching domain suggestions');
         toast.error('Error fetching domain suggestions');
       }
     } catch (error) {
