@@ -44,6 +44,8 @@ export default function BuyDomain() {
     }
   };
 
+  const handleDomainSuggestion = async () => {};
+
   return (
     <div className="flex justify-center items-center h-screen">
       <div>
