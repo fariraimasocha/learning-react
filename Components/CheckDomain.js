@@ -46,7 +46,27 @@ export default function BuyDomain() {
     }
   };
 
-  const handleDomainSuggestion = async () => {};
+  const handleDomainSuggestion = async () => {
+    try {
+      const response = await fetch('/api/groq', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          userSetMessage,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+        toast.error('Error fetching domain suggestions');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('Error fetching domain suggestions');
+    }
+  };
 
   return (
     <div className="flex justify-center items-center h-screen">
