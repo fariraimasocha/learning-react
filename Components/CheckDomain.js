@@ -11,8 +11,10 @@ import { useRouter } from 'next/navigation';
 export default function BuyDomain() {
   const [domain, setDomain] = useState('');
   const router = useRouter();
-  const [model, setModel] = useState('');
-  const [userSetMessage, setUserSetMessage] = useState('');
+  const [model, setModel] = useState('mistral-saba-24b');
+  const [userSetMessage, setUserSetMessage] = useState(
+    'look at the domain and give me 3 domain suggestions'
+  );
 
   const CustomerId = '658344786';
 
