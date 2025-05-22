@@ -10,12 +10,53 @@ import {
 import { Label } from './ui/label';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function MicrositeTemplate({ microsite }) {
+  const [logoUrl, setLogoUrl] = useState('');
+  const [isLogoLoading, setIsLogoLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      setIsLogoLoading(true);
+      try {
+        const response = await fetch(`/api/logo?userId=${microsite.userId}`);
+        const data = await response.json();
+        if (data.success && data.data && data.data.length > 0) {
+          setLogoUrl(data.data[0].url);
+          console.log('Logo URL:', data.data[0].url);
+        } else {
+          console.log('No logos found for this user');
+        }
+      } catch (error) {
+        console.error('Error fetching logo:', error);
+      } finally {
+        setIsLogoLoading(false);
+      }
+    };
+
+    if (microsite && microsite.userId) {
+      fetchLogo();
+    }
+  }, [microsite]);
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
       <Card className="mt-4 w-full max-w-3xl shadow-lg">
-        <CardHeader>
+        <CardHeader className="flex flex-col items-center">
+          {/* Add logo at the top */}
+          {logoUrl && (
+            <div className="mb-4">
+              <Image
+                src={logoUrl}
+                alt="Company Logo"
+                width={100}
+                height={100}
+                priority
+                unoptimized
+              />
+            </div>
+          )}
           <CardTitle>Microsite Preview</CardTitle>
         </CardHeader>
         <CardContent>
