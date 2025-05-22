@@ -43,21 +43,11 @@ export default function MicrositeTemplate({ microsite }) {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
       <Card className="mt-4 w-full max-w-3xl shadow-lg">
-        <CardHeader className="flex flex-col items-center">
-          {/* Add logo at the top */}
+        <CardHeader>
+          <CardTitle>Your Microsite</CardTitle>
           {logoUrl && (
-            <div className="mb-4">
-              <Image
-                src={logoUrl}
-                alt="Company Logo"
-                width={100}
-                height={100}
-                priority
-                unoptimized
-              />
-            </div>
+            <Image src={logoUrl} alt="Logo" width={100} priority height={100} />
           )}
-          <CardTitle>Microsite Preview</CardTitle>
         </CardHeader>
         <CardContent>
           {microsite.imageUrl ? (
