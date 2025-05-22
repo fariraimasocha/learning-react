@@ -11,6 +11,7 @@ import { Label } from './ui/label';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { siFacebook, siX } from 'simple-icons';
 
 export default function MicrositeTemplate({ microsite }) {
   const [logoUrl, setLogoUrl] = useState('');
@@ -79,14 +80,35 @@ export default function MicrositeTemplate({ microsite }) {
               {microsite.socialLinks && microsite.socialLinks.length > 0 ? (
                 microsite.socialLinks.map((social) => (
                   <div key={social._id} className="flex items-center gap-2">
-                    <span className="font-medium">{social.displayName}:</span>
                     <Link
                       href={social.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:underline"
+                      className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+                      title={social.displayName}
                     >
-                      {social.url}
+                      {social.displayName.toLowerCase().includes('facebook') ? (
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="text-blue-600"
+                        >
+                          <path d={siFacebook.path} />
+                        </svg>
+                      ) : social.displayName.toLowerCase().includes('x') ||
+                        social.displayName.toLowerCase().includes('twitter') ? (
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          className="text-gray-800"
+                        >
+                          <path d={siX.path} />
+                        </svg>
+                      ) : null}
                     </Link>
                   </div>
                 ))
