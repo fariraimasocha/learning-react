@@ -83,7 +83,7 @@ export default function BuyDomain() {
 
       if (response.ok) {
         toast.success('Domain suggestions fetched successfully');
-        console.log('Domain suggestions:', data);
+        // console.log('Domain suggestions:', data);
 
         const content = data.content;
         const domainRegex = /\*\*(.*?)\*\*/g;
