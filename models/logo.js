@@ -17,5 +17,6 @@ const logoSchema = new mongoose.Schema(
   }
 );
 
-const Logo = mongoose.models.Logo || mongoose.model('Logo', logoSchema);
+const Logo = refreshModel('Logo', logoSchema);
+
 export default Logo;
