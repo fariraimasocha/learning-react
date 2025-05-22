@@ -76,7 +76,7 @@ export default function MicrositeTemplate({ microsite }) {
             <Label className="text-sm text-gray-500 mb-2 block">
               Social Links:
             </Label>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-row gap-2">
               {microsite.socialLinks && microsite.socialLinks.length > 0 ? (
                 microsite.socialLinks.map((social) => (
                   <div key={social._id} className="flex items-center gap-2">
