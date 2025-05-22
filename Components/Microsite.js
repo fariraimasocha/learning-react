@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { Button } from './ui/button';
@@ -27,9 +27,32 @@ export default function Microsite() {
     twitter: '',
   });
 
+  const [isLogoLoading, setIsLogoLoading] = useState(false);
+  const [logoUrl, setLogoUrl] = useState('');
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const userId = '96450004853';
+
+  useEffect(() => {
+    const fetchLogo = async () => {
+      setIsLogoLoading(true);
+      try {
+        const response = await fetch(`/api/logo/${userId}`);
+        const data = await response.json();
+        if (data && data.url) {
+          setLogoUrl(data.url);
+          toast.success('Logo fetched successfully');
+        }
+      } catch (error) {
+        console.error('Error fetching logo:', error);
+        toast.error('Error fetching logo');
+      } finally {
+        setIsLogoLoading(false);
+      }
+    };
+    fetchLogo();
+  })[userId];
 
   const handleSocialLinkChange = (platform, value) => {
     setSocialLinks((prevLinks) => ({
@@ -50,7 +73,6 @@ export default function Microsite() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Validate image is uploaded
     if (!imageUrl) {
       toast.error('Please upload an image first');
       setIsSubmitting(false);
