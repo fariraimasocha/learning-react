@@ -146,7 +146,6 @@ export default function Microsite() {
             </CardHeader>
             <CardContent>
               <div className="grid gap-4">
-                {/* Image Upload Section */}
                 <div className="mb-4">
                   <Label htmlFor="image" className="mb-2 block">
                     Site Image
