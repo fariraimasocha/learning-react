@@ -36,7 +36,7 @@ export default function Microsite() {
   const userId = '58450004853';
 
   useEffect(() => {
-    const fetchLogo = async () => 
+    const fetchLogo = async () => {
       setIsLogoLoading(true);
       try {
         const response = await fetch(`/api/logo?userId=${userId}`);
