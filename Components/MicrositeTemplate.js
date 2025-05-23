@@ -10,12 +10,30 @@ import {
 import { Label } from './ui/label';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { siFacebook, siX } from 'simple-icons';
+import { useQuery } from '@tanstack/react-query';
+import CircularSpinner from './Loading';
+import { useEffect, useState } from 'react';
 
 export default function MicrositeTemplate({ microsite }) {
+  const userId = microsite?.userId;
   const [logoUrl, setLogoUrl] = useState('');
-  const [isLogoLoading, setIsLogoLoading] = useState(false);
+  const [isLogoLoading, setIsLogoLoading] = useState(true);
+
+  const { data: productsData, isLoading: isProductsLoading } = useQuery({
+    queryKey: ['products', userId],
+    queryFn: async () => {
+      const response = await fetch(`/api/product?userId=${userId}`);
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.message || 'Error fetching products');
+      }
+
+      return data.data;
+    },
+    enabled: !!userId,
+  });
 
   useEffect(() => {
     const fetchLogo = async () => {
@@ -41,13 +59,27 @@ export default function MicrositeTemplate({ microsite }) {
     }
   }, [microsite]);
 
+  const products = productsData || [];
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
       <Card className="mt-4 w-full max-w-3xl shadow-lg">
         <CardHeader>
           <CardTitle>Your Microsite</CardTitle>
-          {logoUrl && (
-            <Image src={logoUrl} alt="Logo" width={100} priority height={100} />
+          {isLogoLoading ? (
+            <div className="w-[100px] h-[100px] flex items-center justify-center">
+              <CircularSpinner size="small" />
+            </div>
+          ) : (
+            logoUrl && (
+              <Image
+                src={logoUrl}
+                alt="Logo"
+                width={100}
+                priority
+                height={100}
+              />
+            )
           )}
         </CardHeader>
         <CardContent>
@@ -70,7 +102,52 @@ export default function MicrositeTemplate({ microsite }) {
             <h2 className="text-lg font-semibold">{microsite.name}</h2>
             <p className="text-sm text-gray-500">{microsite.description}</p>
           </div>
+
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold mb-4">Products</h3>
+            {isProductsLoading ? (
+              <div className="flex justify-center">
+                <CircularSpinner size="small" />
+              </div>
+            ) : products.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {products.map((product) => (
+                  <Card
+                    key={product._id}
+                    className="overflow-hidden hover:shadow-md transition-shadow duration-300"
+                  >
+                    <div className="relative h-40 w-full">
+                      <Image
+                        src={product.imageUrl}
+                        priority
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                    <CardContent className="p-3">
+                      <h3 className="text-md font-bold truncate mb-1">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 line-clamp-2 mb-2">
+                        {product.description}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-green-700">
+                          ${Number(product.price).toFixed(2)}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500 text-center">No products available</p>
+            )}
+          </div>
         </CardContent>
+
         <CardFooter className="flex flex-col items-start">
           <div className="w-full mb-4">
             <Label className="text-sm text-gray-500 mb-2 block">
