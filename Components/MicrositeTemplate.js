@@ -14,6 +14,8 @@ import { siFacebook, siX } from 'simple-icons';
 import { useQuery } from '@tanstack/react-query';
 import CircularSpinner from './Loading';
 import { useEffect, useState } from 'react';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 export default function MicrositeTemplate({ microsite }) {
   const userId = microsite?.userId;
@@ -62,35 +64,47 @@ export default function MicrositeTemplate({ microsite }) {
   const products = productsData || [];
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
-      <Card className="mt-4 w-full max-w-3xl shadow-lg">
-        <CardHeader>
-          <CardTitle>Your Microsite</CardTitle>
-          {isLogoLoading ? (
-            <div className="w-[100px] h-[100px] flex items-center justify-center">
-              <CircularSpinner size="small" />
+    <div className="flex justify-center items-center min-h-screen bg-gray-50">
+      <div className="w-full shadow-lg rounded-none">
+        <div className="">
+          <div className="flex items-center justify-between px-5 border py-2">
+            <div className="flex items-center gap-4">
+              {isLogoLoading ? (
+                <div className="w-[60px] h-[60px] flex items-center justify-center">
+                  <CircularSpinner size="small" />
+                </div>
+              ) : (
+                logoUrl && (
+                  <Image
+                    src={logoUrl}
+                    alt="Logo"
+                    width={60}
+                    priority
+                    height={60}
+                    style={{
+                      borderRadius: '1.2rem',
+                      overflow: 'hidden',
+                    }}
+                  />
+                )
+              )}
+              <CardTitle className="font-bold text-xl">
+                Your Microsite
+              </CardTitle>
             </div>
-          ) : (
-            logoUrl && (
-              <Image
-                src={logoUrl}
-                alt="Logo"
-                width={100}
-                priority
-                height={100}
-              />
-            )
-          )}
-        </CardHeader>
-        <CardContent>
+            <Button variant="">Contact Us</Button>
+          </div>
+        </div>
+        <CardContent className=" border-gray-200">
           {microsite.imageUrl ? (
-            <div className="mb-4 w-full relative rounded-md overflow-hidden h-48">
+            <div className="mb-4 w-full relative rounded-md overflow-hidden h-[500px] mt-7">
               <Image
                 src={microsite.imageUrl}
                 alt={`${microsite.name} image`}
                 fill
                 className="object-cover"
                 unoptimized
+                priority
               />
             </div>
           ) : (
@@ -110,7 +124,7 @@ export default function MicrositeTemplate({ microsite }) {
                 <CircularSpinner size="small" />
               </div>
             ) : products.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 {products.map((product) => (
                   <Card
                     key={product._id}
@@ -134,9 +148,9 @@ export default function MicrositeTemplate({ microsite }) {
                         {product.description}
                       </p>
                       <div className="flex justify-between items-center">
-                        <span className="font-semibold text-green-700">
+                        <Badge className="font-semibold">
                           ${Number(product.price).toFixed(2)}
-                        </span>
+                        </Badge>
                       </div>
                     </CardContent>
                   </Card>
@@ -149,7 +163,7 @@ export default function MicrositeTemplate({ microsite }) {
         </CardContent>
 
         <CardFooter className="flex flex-col items-start">
-          <div className="w-full mb-4">
+          <div className="w-full mb-4 mt-4">
             <Label className="text-sm text-gray-500 mb-2 block">
               Social Links:
             </Label>
@@ -196,11 +210,14 @@ export default function MicrositeTemplate({ microsite }) {
               )}
             </div>
           </div>
-          <Label className="text-sm text-gray-500">
-            Created by User {microsite.userId}
+          <Label className="text-sm text-gray-500 mb-4">
+            Created by{' '}
+            <span>
+              <Badge>Wondabox.ai</Badge>
+            </span>
           </Label>
         </CardFooter>
-      </Card>
+      </div>
     </div>
   );
 }
