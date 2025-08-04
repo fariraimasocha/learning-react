@@ -1,10 +1,10 @@
-import { createUploadthing } from "uploadthing/next-legacy";
-import { UploadThingError } from "uploadthing/server";
+import { createUploadthing } from 'uploadthing/next-legacy';
+import { UploadThingError } from 'uploadthing/server';
 
 const f = createUploadthing();
 
 // Simplified auth function without type annotations
-const auth = (req, res) => ({ id: "fakeId" }); // Fake auth function
+const auth = (req, res) => ({ id: 'fakeId' }); // Fake auth function
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -15,7 +15,7 @@ export const ourFileRouter = {
        * For full list of options and defaults, see the File Route API reference
        * @see https://docs.uploadthing.com/file-routes#route-config
        */
-      maxFileSize: "4MB",
+      maxFileSize: '4MB',
       maxFileCount: 1,
     },
   })
@@ -25,16 +25,16 @@ export const ourFileRouter = {
       const user = auth(req, res);
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new UploadThingError("Unauthorized");
+      if (!user) throw new UploadThingError('Unauthorized');
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.userId);
+      console.log('Upload complete for userId:', metadata.userId);
 
-      console.log("file url", file.ufsUrl);
+      console.log('file url', file.ufsUrl);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { uploadedBy: metadata.userId };

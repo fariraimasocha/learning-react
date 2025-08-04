@@ -1,11 +1,11 @@
 'use client';
 
-import BuyDomain from '@/Components/CheckDomain';
+import Email from '@/Components/Email';
 
 export default function MainPage() {
   return (
     <>
-      <BuyDomain />
+      <Email />
     </>
   );
 }
