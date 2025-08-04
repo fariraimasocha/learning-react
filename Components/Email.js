@@ -16,8 +16,13 @@ export default function Email() {
   };
 
   return (
-    <div className='min-h-screen flex justify-center items-center'>
-      <Button className="bg-gray-900 text-white hover:bg-gray-800 transition-all" onClick={handleSendEmail}>Send Mail</Button>
+    <div className="min-h-screen flex justify-center items-center">
+      <Button
+        className="bg-gray-900 text-white hover:bg-gray-800 transition-all"
+        onClick={handleSendEmail}
+      >
+        Send Mail
+      </Button>
     </div>
   );
 }

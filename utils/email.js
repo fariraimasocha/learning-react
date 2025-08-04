@@ -2,16 +2,16 @@
 
 import { Resend } from 'resend';
 
-//   const emails = [
-//     'nichole@gatewaype.com',
-//     'tungamirai@gmai.com',
-//     'angela.machonesa@gmail.com',
-//     'hanlahav123@gmail.com',
-//     'mkhwanazisbeke@gmail.com',
-//     'fhuluste@gmail.com',
-//     'mangemaleka@gmail.com',
-//     'christianiecarty@getvanda.com',
-//   ];
+const emailList = [
+  { id: 0, email: 'nichole@gatewaype.com', name: 'Nichole' },
+  { id: 1, email: 'tungamirai@gmai.com', name: 'Tungamirai' },
+  { id: 2, email: 'angela.machonesa@gmail.com', name: 'Angela' },
+  { id: 3, email: 'hanlahav123@gmail.com', name: 'Hannelie' },
+  { id: 4, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
+  { id: 5, email: 'fhuluste@gmail.com', name: 'Fhulufhelo' },
+  { id: 6, email: 'mangemaleka@gmail.com', name: 'Maleka' },
+  { id: 7, email: 'christianiecarty@getvanda.com', name: 'Christianie' },
+];
 
 const emails = ['fariraimasocha@gmail.com'];
 
