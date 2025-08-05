@@ -1,22 +1,15 @@
 'use server';
 import { Resend } from 'resend';
-import { getEmailHTML } from './getEmailTemplate';
+import { getPaymentFollowUpHTML } from './getEmailTemplate';
 
 const emails = [
-  { id: 0, email: 'nichole@gatewaype.com', name: 'Nichole' },
-  { id: 1, email: 'tungamirai@gmai.com', name: 'Tungamirai' },
-  { id: 2, email: 'angela.machonesa@gmail.com', name: 'Angela' },
-  { id: 3, email: 'hanlahav123@gmail.com', name: 'Hannelie' },
-  { id: 4, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
-  { id: 5, email: 'fhuluste@gmail.com', name: 'Fhulufhelo' },
-  { id: 6, email: 'mangemaleka@gmail.com', name: 'Maleka' },
-  { id: 7, email: 'christianiecarty@getvanda.com', name: 'Christianie' },
-  { id: 8, email: 'josephcbertrand@gmail.com', name: 'Joseph' },
+    {email: 'lawrencemujerachipara@outlook.com', name: 'Lawrence'},
+    {email: 'jeddidahmutore@gmail.com', name: 'Jeddidah'},
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function sendEmail() {
+export async function checkEmail() {
   try {
 
     const results = [];
@@ -26,7 +19,7 @@ export async function sendEmail() {
         from: 'farirai@linkgenie.one',
         to: [recipient.email],
         subject: 'Feedback for using Linkgenie 💚 got 2 mins?',
-        html: getEmailHTML(recipient.name),
+        html: getPaymentFollowUpHTML(recipient.name),
       });
       
       results.push({
