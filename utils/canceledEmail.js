@@ -3,8 +3,7 @@ import { Resend } from 'resend';
 import { getPaymentFollowUpHTML } from './getEmailTemplate';
 
 const emails = [
-    {email: 'lawrencemujerachipara@outlook.com', name: 'Lawrence'},
-    {email: 'jeddidahmutore@gmail.com', name: 'Jeddidah'},
+    {email: 'nichole@gatewaype.com', name: 'Nichole' },
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -18,7 +17,7 @@ export async function checkEmail() {
       const emailData = await resend.emails.send({
         from: 'farirai@linkgenie.one',
         to: [recipient.email],
-        subject: 'Feedback for using Linkgenie 💚 got 2 mins?',
+        subject: 'Feedback for using Linkgenie got 2 mins?',
         html: getPaymentFollowUpHTML(recipient.name),
       });
       
