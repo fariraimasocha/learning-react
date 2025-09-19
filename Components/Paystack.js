@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Button } from '@/components/ui/button';
+import { Button } from './ui/button';
 import {
   Form,
   FormDescription,
@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from './ui/form';
-import { Input } from '@/components/ui/input';
+import { Input } from './ui/input';
 import axios from 'axios';
 
 const formSchema = z.object({
