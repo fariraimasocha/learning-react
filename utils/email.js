@@ -1,47 +1,56 @@
 'use server';
 import { Resend } from 'resend';
 import { getEmailHTML } from './getEmailTemplate';
+import { getFreeCreditExhaustedHTML } from './getEmailTemplate';
+import { allUsers } from './allUsers';
 
 const emails = [
-  { id: 0, email: 'teejaysoarz@gmail.com', name: 'Daniel' },
-  { id: 1, email: 'tungamirai@gmai.com', name: 'Tungamirai' },
-  { id: 2, email: 'angela.machonesa@gmail.com', name: 'Angela' },
-  { id: 3, email: 'hanlahav123@gmail.com', name: 'Hannelie' },
-  { id: 4, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
-  { id: 5, email: 'fhuluste@gmail.com', name: 'Fhulufhelo' },
-  { id: 6, email: 'mangemaleka@gmail.com', name: 'Maleka' },
-  { id: 7, email: 'christianiecarty@getvanda.com', name: 'Christianie' },
-  { id: 8, email: 'josephcbertrand@gmail.com', name: 'Joseph' },
-  { id: 9, email: 'mactradingking@gmail.com', name: 'Brandon'},
-  { id: 10, email: 'walkiet79@gmail.com', name: 'Winnie'},
-  { id: 11, email: 'josephcbertrand@gmail.com', name: 'Joseph'},
-  { id: 12, email: 'tnguruve22@gmail.com', name: 'Cofounder Maboss Tino'},
-  { id: 13, email: 'fariraimasocha@gmail.com', name: 'Fatsoe'},
-  { id: 14, email: '', name: ''},
+  { id: 1, email: 'gnthigah@gmail.com', name: 'Geraldine' },
+  { id: 2, email: 'mactradingking@gmail.com', name: 'Brandon Dotson' },
+  { id: 3, email: 'business.devinbrown@gmail.com', name: 'Devin Brown' },
+  { id: 4, email: 'panamuche@gmail.com', name: 'Panashe Muchengetwa' },
+  { id: 5, email: 'agbosamsonite@gmail.com', name: 'Samson Agbo' },
+  { id: 6, email: 'brillnkomo@gmail.com', name: 'Brilliant Nkomo' },
+  { id: 7, email: 'pridemudondo1@gmail.com', name: 'Pride Mudondo' },
+  { id: 8, email: 'angelynndlovu@gmail.com', name: 'Musawenkosi Ndlovu' },
+  { id: 9, email: 'teejaysoarz@gmail.com', name: 'Daniel Bokantero' },
+  { id: 10, email: 'walkiet79@gmail.com', name: 'Winnie Cooper' },
+  { id: 11, email: 'josephcbertrand@gmail.com', name: 'joseph bertrand' },
+  { id: 12, email: 'tungamirai@gmai.com', name: 'Tungamirai Zuva' },
+  { id: 13, email: 'angela.machonesa@gmail.com', name: 'Angela Machonesa' },
+  { id: 14, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
+  { id: 15, email: 'fhuluste@gmail.com', name: 'fhulufhelo Pharamela' },
+  { id: 16, email: 'mangemaleka@gmail.com', name: 'll Maleka' },
+  {
+    id: 17,
+    email: 'christianiecarty@getvanda.com',
+    name: 'Christianie Victor Carty',
+  },
+  { id: 18, email: 'fariraimasocha@gmail.com', name: 'Fari' },
+  { id: 19, email: 'tnguruve22@gmail.com', name: 'Tino' },
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendEmail() {
   try {
-
     const results = [];
-    
-    for (const recipient of emails) {
+
+    for (const recipient of allUsers) {
       const emailData = await resend.emails.send({
-        from: 'farirai@linkgenie.one',
+        from: 'fari@linkgenie.one',
         to: [recipient.email],
         subject: 'Feedback for using Linkgenie got 2 mins?',
-        html: getEmailHTML(recipient.name),
+        html: getFreeCreditExhaustedHTML(recipient.username),
       });
-      
+
       results.push({
         email: recipient.email,
-        name: recipient.name,
-        result: emailData
+        name: recipient.username,
+        result: emailData,
       });
     }
-    
+
     console.log('Emails sent successfully:', results);
     return { success: true, data: results };
   } catch (error) {

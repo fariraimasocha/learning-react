@@ -7,8 +7,6 @@ export const getEmailHTML = (firstName) => {
      
       <p>Whether you've posted once or a bunch you're part of this from the start, and that means everything to us.</p>
      
-      <p>Want to get the most out of Linkgenie? <a href="https://www.loom.com/share/1da3de8e7f504f29ab19b061d11113bd?sid=bd87c461-d1e2-426c-8f4f-670c8da741ca" style="color: #007bff; text-decoration: none;">Check out this clear demo</a> to see all the features in action.</p>
-     
       <p>Now… real talk.</p>
      
       <p>We wanna make Linkgenie even better. But we can't read minds (yet 👀), so we need your help.</p>
@@ -51,6 +49,31 @@ export const getPaymentFollowUpHTML = (firstName) => {
       <p>Talk soon,<br>
       Fari & Tino<br>
       Co-Founders, Linkgenie<br>
+      <a href="https://linkgenie.one" style="color: #007bff; text-decoration: none;">linkgenie.one</a></p>
+    </div>
+  `;
+};
+
+export const getFreeCreditExhaustedHTML = (firstName) => {
+  return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto;">
+      <p>Hey ${firstName},</p>
+      
+      <p>Looks like you’ve used up all your free Linkgenie credits 👏</p>
+      
+      <p>We love seeing you put Linkgenie to work! If you’re finding it useful, now’s a great time to take that next step and unlock more features for as little as $12/month.</p>
+      
+      <p>If you had any roadblocks, felt confused, or just want more info before upgrading, we’d love to hear what might help.</p>
+      
+      <p>👉 <a href="https://docs.google.com/forms/d/e/1FAIpQLSeAlS_tx9POlnn-EFLvhwvrvTDnD05HtUJIwnhett9eTEaRLQ/viewform?usp=dialog" style="color: #007bff; text-decoration: none;">Share your feedback here</a></p>
+      
+      <p>Your feedback shapes Linkgenie, and we read every word!</p>
+      
+      <p>Thanks for taking Linkgenie for a spin.<br>
+      
+      <p>Tino</p>
+      Co-Founder, Linkgenie<br>
+  
       <a href="https://linkgenie.one" style="color: #007bff; text-decoration: none;">linkgenie.one</a></p>
     </div>
   `;
