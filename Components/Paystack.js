@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -16,6 +16,8 @@ import {
 } from './ui/form';
 import { Input } from './ui/input';
 import axios from 'axios';
+import { useSearchParams } from 'next/navigation';
+import { verifyTrasaction } from '@/utils/paystack';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -24,6 +26,26 @@ const formSchema = z.object({
 
 export default function MyForm() {
   const [loading, setLoading] = useState(false);
+  const params = useSearchParams();
+
+  const checkPayment = async (reference) => {
+    verifyTrasaction(reference).then((res) => {
+      console.log('Verification result:', res);
+      if (res.success === 'true') {
+        toast.success('Payment verified successfully!');
+      } else {
+        toast.error('Payment verification failed: ' + res.error);
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log('Route params:', params.get('reference'));
+    if (params.get('reference')) {
+      checkPayment(params.get('reference'));
+    }
+  }, [params]);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {

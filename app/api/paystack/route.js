@@ -11,7 +11,7 @@ export async function POST(request) {
     const transaction = await paystack.transaction.initialize({
       email,
       amount: amount * 100,
-      callback_url: 'http://localhost:3000',
+      callback_url: '',
     });
 
     console.log('Transaction initialized:', transaction);

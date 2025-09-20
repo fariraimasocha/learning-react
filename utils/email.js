@@ -2,6 +2,7 @@
 import { Resend } from 'resend';
 import { getEmailHTML } from './getEmailTemplate';
 import { getFreeCreditExhaustedHTML } from './getEmailTemplate';
+import { getLinkedInLiveHTML } from './getEmailTemplate';
 import { allUsers } from './allUsers';
 
 const emails = [
@@ -40,8 +41,8 @@ export async function sendEmail() {
       const emailData = await resend.emails.send({
         from: 'fari@linkgenie.one',
         to: [recipient.email],
-        subject: 'Feedback for using Linkgenie got 2 mins?',
-        html: getFreeCreditExhaustedHTML(recipient.username),
+        subject: 'Tomorrow: Writing posts that get read on LinkedIn Live event',
+        html: getLinkedInLiveHTML(recipient.username),
       });
 
       results.push({

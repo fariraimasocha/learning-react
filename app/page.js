@@ -9,7 +9,7 @@ export default function MainPage() {
     <>
       <Paystack />
       {/* <Crud /> */}
-      {/* <Email /> */}
+      <Email />
     </>
   );
 }

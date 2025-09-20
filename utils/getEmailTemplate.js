@@ -78,3 +78,44 @@ export const getFreeCreditExhaustedHTML = (firstName) => {
     </div>
   `;
 };
+
+export const getLinkedInLiveHTML = (firstName) => {
+  return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto;">
+      <p>Hey ${firstName},</p>
+      
+      <p>Big news! We are going live with something we know you'll love 🔥</p>
+      
+      <p><strong>"Writing posts on LinkedIn that actually get read"</strong></p>
+      
+      <p>Real talk - we see so many people pouring their heart into LinkedIn posts that just... disappear into the void.</p>
+      
+      <p>Sound familiar? 👀</p>
+      
+      <p>Tomorrow, we're breaking down exactly how to:</p>
+      <p>
+      ✅ Write posts that stop the scroll and grab attention<br>
+      ✅ Get real engagement (not just polite likes)<br>
+      ✅ Turn your posts into conversations people actually want to join
+      </p>
+      
+      <p><strong>📅 When:</strong> Tomorrow, Thursday at 6 pm CAT / 10 am EST<br>
+      <strong>📍 Where:</strong> LinkedIn Live</p>
+      
+      <p>This isn't some generic "post more content" advice. We're sharing the exact frameworks and psychological triggers that make posts impossible to scroll past.</p>
+      
+      <p>👉 <a href="https://www.linkedin.com/events/writingpoststhatactuallygetread7374804558490951682/theater/" style="color: #007bff; text-decoration: none;">Set a reminder here</a></p>
+      
+      <p>Pro tip: Come with your worst-performing post! We'll show you exactly how to fix it live.</p>
+      
+      <p>See you there,<br>
+      Fari & Tino<br>
+
+      <a href="https://linkgenie.one" style="color: #007bff; text-decoration: none;">linkgenie.one</a></p>
+      
+      <p style="font-size: 12px; color: #666; margin-top: 30px;">
+      P.S. If you can't make it live, no worries - but the replay won't be up forever 😉
+      </p>
+    </div>
+  `;
+};
