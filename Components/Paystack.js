@@ -18,6 +18,7 @@ import { Input } from './ui/input';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import { verifyTrasaction } from '@/utils/paystack';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -81,56 +82,58 @@ export default function MyForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <Form {...form} className="w-full max-w-md">
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 max-w-3xl mx-auto py-10"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="email"
-                    type="email"
-                    {...field}
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormDescription>Enter your email</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="min-h-screen flex items-center justify-center">
+        <Form {...form} className="w-full max-w-md">
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8 max-w-3xl mx-auto py-10"
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="email"
+                      type="email"
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormDescription>Enter your email</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="amount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Amount</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="amount"
-                    type="number"
-                    {...field}
-                    value={field.value}
-                    onChange={field.onChange}
-                  />
-                </FormControl>
-                <FormDescription>Enter the amount</FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
-    </div>
+            <FormField
+              control={form.control}
+              name="amount"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Amount</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="amount"
+                      type="number"
+                      {...field}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormDescription>Enter the amount</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Form>
+      </div>
+    </Suspense>
   );
 }
