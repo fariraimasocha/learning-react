@@ -18,17 +18,20 @@ const emails = [
   { id: 10, email: 'walkiet79@gmail.com', name: 'Winnie Cooper' },
   { id: 11, email: 'josephcbertrand@gmail.com', name: 'joseph bertrand' },
   { id: 12, email: 'tungamirai@gmai.com', name: 'Tungamirai Zuva' },
-  { id: 13, email: 'angela.machonesa@gmail.com', name: 'Angela Machonesa' },
-  { id: 14, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
-  { id: 15, email: 'fhuluste@gmail.com', name: 'fhulufhelo Pharamela' },
-  { id: 16, email: 'mangemaleka@gmail.com', name: 'll Maleka' },
+  { id: 13, email: 'mkhwanazisbeke@gmail.com', name: 'Sbekezelo' },
+  { id: 14, email: 'fhuluste@gmail.com', name: 'fhulufhelo Pharamela' },
+  { id: 15, email: 'mangemaleka@gmail.com', name: 'll Maleka' },
   {
-    id: 17,
+    id: 16,
     email: 'christianiecarty@getvanda.com',
     name: 'Christianie Victor Carty',
   },
-  { id: 18, email: 'fariraimasocha@gmail.com', name: 'Fari' },
-  { id: 19, email: 'tnguruve22@gmail.com', name: 'Tino' },
+  { id: 17, email: 'fariraimasocha@gmail.com', name: 'Fari' },
+  { id: 18, email: 'tnguruve22@gmail.com', name: 'Tino' },
+  { id: 19, email: 'tinznhengu@gmail.com', name: 'Tinashe Nhengu' },
+  { id: 20, email: 'elsimbaprosper@gmail.com', name: 'Ashell Sengu' },
+  { id: 21, email: 'tatendashamiso@gmail.com', name: 'Melody Gomo' },
+  { id: 22, email: 'mrs.tsungiemanyeza@gmail.com', name: 'Tsungie Manyeza' },
 ];
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -37,17 +40,17 @@ export async function sendEmail() {
   try {
     const results = [];
 
-    for (const recipient of allUsers) {
+    for (const recipient of emails) {
       const emailData = await resend.emails.send({
         from: 'fari@linkgenie.one',
         to: [recipient.email],
-        subject: 'Tomorrow: Writing posts that get read on LinkedIn Live event',
-        html: getLinkedInLiveHTML(recipient.username),
+        subject: 'Writing posts that get read on LinkedIn Live event',
+        html: getLinkedInLiveHTML(recipient.name),
       });
 
       results.push({
         email: recipient.email,
-        name: recipient.username,
+        name: recipient.name,
         result: emailData,
       });
     }

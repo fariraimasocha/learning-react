@@ -92,19 +92,19 @@ export const getLinkedInLiveHTML = (firstName) => {
       
       <p>Sound familiar? 👀</p>
       
-      <p>Tomorrow, we're breaking down exactly how to:</p>
+      <p>Today, we're breaking down exactly how to:</p>
       <p>
+      ✅ How. to optimize your LinkedIn profile for max visibility<br>
       ✅ Write posts that stop the scroll and grab attention<br>
-      ✅ Get real engagement (not just polite likes)<br>
       ✅ Turn your posts into conversations people actually want to join
       </p>
       
-      <p><strong>📅 When:</strong> Tomorrow, Thursday at 6 pm CAT / 10 am EST<br>
+      <p><strong>📅 When:</strong> Today at 6 pm CAT / 10 am EST<br>
       <strong>📍 Where:</strong> LinkedIn Live</p>
       
       <p>This isn't some generic "post more content" advice. We're sharing the exact frameworks and psychological triggers that make posts impossible to scroll past.</p>
       
-      <p>👉 <a href="https://www.linkedin.com/events/writingpoststhatactuallygetread7374804558490951682/theater/" style="color: #007bff; text-decoration: none;">Set a reminder here</a></p>
+      <p>👉 <a href="https://www.linkedin.com/events/getlivefeedbackonyourlinkedinpr7376582716059811840/theater/" style="color: #007bff; text-decoration: none;">Set a reminder here</a></p>
       
       <p>Pro tip: Come with your worst-performing post! We'll show you exactly how to fix it live.</p>
       

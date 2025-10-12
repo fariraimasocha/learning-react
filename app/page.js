@@ -7,7 +7,7 @@ import Paystack from '@/Components/Paystack';
 export default function MainPage() {
   return (
     <>
-      <Paystack />
+      {/* <Paystack /> */}
       {/* <Crud /> */}
       <Email />
     </>

@@ -24,6 +24,7 @@ export async function POST(request) {
       switch (data.event) {
         case 'charge.success':
           console.log('Payment successful:', data.data);
+
           // Process successful payment
           break;
         case 'charge.failed':
