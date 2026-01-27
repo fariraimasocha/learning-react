@@ -1,15 +1,15 @@
 'use client';
 
-import Crud from '@/Components/Crud';
 import Email from '@/Components/Email';
-import Paystack from '@/Components/Paystack';
+import Finance from '@/Components/Finance';
+import Wrap from '@/Components/Wrap';
 
 export default function MainPage() {
   return (
     <>
-      {/* <Paystack /> */}
-      {/* <Crud /> */}
+      {/* <Finance />*/}
       <Email />
+      {/* <Wrap />*/}
     </>
   );
 }
