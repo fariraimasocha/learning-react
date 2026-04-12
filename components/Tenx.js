@@ -14,7 +14,7 @@ import { motion } from 'motion/react';
 export default function Tenx() {
   return (
     <motion.div className="flex items-center justify-center min-h-screen">
-      <Card className="w-[400px]">
+      <Card className="w-[350]">
         <Image
           src="/images/p1.jpg"
           alt="McLaren 720S"
@@ -32,9 +32,7 @@ export default function Tenx() {
             aerodynamic design.
           </p>
         </CardContent>
-        <CardFooter>
-          <p className="text-sm text-muted-foreground">Supercar Collection</p>
-        </CardFooter>
+        <CardFooter>Supercar Collection</CardFooter>
       </Card>
     </motion.div>
   );
